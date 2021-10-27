@@ -1,3 +1,4 @@
 #!/bin/bash
-
+mkdir -p ~/postgres_data
+export HOST_PGDATA=$(realpath ~/postgres_data)
 docker-compose up -d
