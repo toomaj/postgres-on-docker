@@ -1,5 +1,5 @@
 ### Note:
-`coreutils` must be installed on MacOS, otherwise `realpath` won't work
+`coreutils` must be installed on MacOS to make `realpath` work.
 
 `brew install coreutils`
 
