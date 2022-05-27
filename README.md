@@ -4,12 +4,12 @@
 `brew install coreutils`
 
 ### Usage:
-`sudo chmod +x up`
-
-`sudo chmod +x stop`
-
 `git clone github.com:toomaj/docker-postgres.git`
 
 `cd docker-postgres`
+
+`sudo chmod +x up`
+
+`sudo chmod +x stop`
 
 `bash up`
