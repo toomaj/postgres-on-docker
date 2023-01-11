@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.9'
 
 services:
   postgres:
@@ -7,13 +7,20 @@ services:
       dockerfile: ./files/postgres.Dockerfile
     image: postgres
     restart: always
+    env_file:
+      - .env
     volumes:
-      - ${HOST_PGDATA}/postgres:/var/lib/postgresql
+      - pgdata:${GUEST_PG_PATH}
     environment:
-      - PGDATA="/var/lib/postgresql/data/pgdata"
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
+      - PGDATA=${GUEST_PGDATA}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - 5432:5432
 volumes:
-  pgdata:
+   pgdata:
+      driver: local
+      driver_opts:
+         type: none
+         o: bind
+         device: ${HOST_PG_PATH}

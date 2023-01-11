@@ -1,4 +1,20 @@
 #!/bin/bash
-mkdir -p ~/postgres_data
-export HOST_PGDATA=$(realpath ~/postgres_data)
+export ENV_DOCKER_PG_PATH=~/.docker_data/postgres
+mkdir -p $ENV_DOCKER_PG_PATH
+
+export ENV_HOST_PG_PATH=$(realpath $ENV_DOCKER_PG_PATH)
+export ENV_GUEST_PG_PATH="/var/lib/postgresql/data"
+export ENV_GUEST_PGDATA="${ENV_GUEST_PG_PATH}/pgdata"
+export ENV_POSTGRES_USER=postgres
+export ENV_POSTGRES_PASSWORD=password
+
+rm -f .env
+tee -a .env << EOD
+HOST_PG_PATH=${ENV_HOST_PG_PATH}
+GUEST_PG_PATH=${ENV_GUEST_PG_PATH}
+GUEST_PGDATA=${ENV_GUEST_PGDATA}
+POSTGRES_USER=${ENV_POSTGRES_USER}
+POSTGRES_PASSWORD=${ENV_POSTGRES_PASSWORD}
+EOD
+
 docker-compose up -d
